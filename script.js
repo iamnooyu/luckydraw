@@ -9,12 +9,14 @@ const settingBtn = document.getElementById('settingbtn');
 const fullscreenBtn = document.getElementById('fullscreenbtn');
 
 const settingscreen = document.getElementById('settingscreen');
+const closesettingbtn = document.getElementById('closesettingbtn');
 
 function updateNames() {
     const inputText = nameInput.value.trim();
     names = inputText.split('\n').filter(name => name.trim() !== '');
     drawButton.disabled = names.length === 0;
     settingscreen.style.display = "none";
+    closesettingbtn.style.display = "block";
 }
 
 function getRandomIndex(){
@@ -76,6 +78,10 @@ drawButton.addEventListener('click', () => {
     } else {
         result.textContent = 'รบกวนกรอกชื่อด้วยครับ';
     }
+});
+
+closesettingbtn.addEventListener('click', () => {
+    settingscreen.style.display = "none";
 });
 
 function displayListInTextbox() {

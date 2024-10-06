@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Mitr:wght@200;400;600&display=swap');
 
+@phone: ~"only screen and (max-width: 576px)";
+@phoneandtablet: ~"only screen and (max-width: 768px)";
+@tablet: ~"only screen and (min-width: 577px) and (max-width: 768px)";
+@tabletanddesktop: ~"only screen and (min-width: 577px)";
+@desktop: ~"only screen and (min-width: 769px)";
+
 body{
     background-color: #462f5d;
     color: #FFF;
@@ -62,6 +68,17 @@ body{
     z-index: 100;
     background: rgba(0, 0, 0, 0.8);
 
+    #closesettingbtn{
+        position: absolute;
+        right: 2rem;
+        top: 2rem;
+        width: 3rem;
+        height: auto;
+        cursor: pointer;
+
+        display: none;
+    }
+
     #settingscreentitle{
         font-size: 2.5rem;
         font-weight: 600;
@@ -76,6 +93,9 @@ body{
         width: 100%;
         max-width: 200px; 
         height: auto;
+        @media @phoneandtablet {
+            max-width: 150px;
+        }
     }
 }
 #menu{
@@ -154,15 +174,25 @@ textarea {
     resize: none;
 }
 #result {
-    font-size: 5rem;
+    font-size: 3rem;
     margin: 20px 0;
     height: 7.5rem;
-    line-height: 1.5;
+    line-height: 2.5;
     overflow: hidden;
     background: #1f132b;
     border-radius: 1rem;
     width: 80vw;
+
+    display: flex;
+    justify-content: center;
+
+    @media @phoneandtablet {
+        font-size: 2rem;
+        height: 5rem;
+        margin:  1rem 0;
+    }
 }
+
 .name {
     display: inline-block;
     animation: slide-up 0.5s ease-out;

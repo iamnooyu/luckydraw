@@ -53,6 +53,15 @@ body {
   z-index: 100;
   background: rgba(0, 0, 0, 0.8);
 }
+#settingscreen #closesettingbtn {
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+  width: 3rem;
+  height: auto;
+  cursor: pointer;
+  display: none;
+}
 #settingscreen #settingscreentitle {
   font-size: 2.5rem;
   font-weight: 600;
@@ -67,6 +76,11 @@ body {
   width: 100%;
   max-width: 200px;
   height: auto;
+}
+@media only screen and (max-width: 768px) {
+  #logodevteddy img {
+    max-width: 150px;
+  }
 }
 #menu {
   position: absolute;
@@ -169,14 +183,23 @@ textarea {
   resize: none;
 }
 #result {
-  font-size: 5rem;
+  font-size: 3rem;
   margin: 20px 0;
   height: 7.5rem;
-  line-height: 1.5;
+  line-height: 2.5;
   overflow: hidden;
   background: #1f132b;
   border-radius: 1rem;
   width: 80vw;
+  display: flex;
+  justify-content: center;
+}
+@media only screen and (max-width: 768px) {
+  #result {
+    font-size: 2rem;
+    height: 5rem;
+    margin: 1rem 0;
+  }
 }
 .name {
   display: inline-block;
