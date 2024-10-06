@@ -4,121 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lucky Draw</title>
-  <style>
-      body {
-          font-family: Arial, sans-serif;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 100vh;
-          margin: 0;
-          background-color: #f0f0f0;
-      }
-      .container {
-          text-align: center;
-          width: 80%;
-          max-width: 600px;
-      }
-      #result {
-          font-size: 2em;
-          margin: 20px 0;
-          height: 1.2em;
-          overflow: hidden;
-      }
-      .name {
-          display: inline-block;
-          animation: slide-up 0.5s ease-out;
-      }
-      @keyframes slide-up {
-          from {
-              transform: translateY(100%);
-              opacity: 0;
-          }
-          to {
-              transform: translateY(0);
-              opacity: 1;
-          }
-      }
-      button {
-          font-size: 1em;
-          padding: 10px 20px;
-          cursor: pointer;
-          margin: 10px;
-      }
-      textarea {
-          width: 100%;
-          height: 150px;
-          margin: 10px 0;
-          padding: 5px;
-          font-size: 1em;
-      }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="container">
-  <h1>Lucky Draw</h1>
-  <textarea id="nameInput" placeholder="Enter names (one per line)"></textarea>
-  <div>
-      <button id="updateButton">Update Names</button>
-      <button id="drawButton">Draw a Name</button>
-  </div>
-  <div id="result"></div>
+<div id="logodevteddy">
+    <img src="images/logo-devteddy.png">
 </div>
-
-<script>
-  let names = [];
-  const result = document.getElementById('result');
-  const drawButton = document.getElementById('drawButton');
-  const updateButton = document.getElementById('updateButton');
-  const nameInput = document.getElementById('nameInput');
-
-  function updateNames() {
-    const inputText = nameInput.value.trim();
-    names = inputText.split('\n').filter(name => name.trim() !== '');
-    drawButton.disabled = names.length === 0;
-  }
-
-  function getRandomName() {
-    return names[Math.floor(Math.random() * names.length)];
-  }
-
-  function getFinalRandomName() {
-    const randomIndex = Math.floor(Math.random() * names.length);
-    const winner = names.splice(randomIndex, 1)[0];
-    return winner;
-  }
-
-  function animateDraw() {
-    let duration = 3000; // 3 seconds
-    let interval = 100; // 0.1 second
-    let steps = duration / interval;
-    let step = 0;
-
-    const animation = setInterval(() => {
-      result.innerHTML = `<span class="name">${getRandomName()}</span>`;
-      step++;
-
-      if (step >= steps) {
-        clearInterval(animation);
-        result.innerHTML = `<span class="name">${getFinalRandomName()}</span>`;
-        drawButton.disabled = false;
-      }
-    }, interval);
-  }
-
-  updateButton.addEventListener('click', updateNames);
-
-  drawButton.addEventListener('click', () => {
-      if (names.length > 0) {
-          drawButton.disabled = true;
-          animateDraw();
-      } else {
-          result.textContent = 'Please enter names first';
-      }
-  });
-
-  // Initialize
-  updateNames();
-</script>
+<div id="menu">
+    <img src="images/fullscreen.svg" id="fullscreenbtn">
+    <img src="images/menu.svg" id="settingbtn">
+</div>
+<div class="container" id="mainscreen">
+    <img src="images/eventlogo.png" id="logoevent" alt="">
+    <div id="result"></div>
+    <div><button id="drawButton">จับฉลาก</button></div>
+</div>
+<div class="container" id="settingscreen">
+    <div id="settingscreentitle">Lucky Draw</div>
+    <textarea id="nameInput" placeholder="ระบุชื่อ (1 ชื่อ/บรรทัด)"></textarea>
+    <div><button id="updateButton">Update Names</button></div>
+</div>
+<script src="script.js"></script>
 </body>
 </html>
