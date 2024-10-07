@@ -186,11 +186,15 @@ textarea {
   font-size: 3rem;
   margin: 20px 0;
   height: 7.5rem;
-  line-height: 2.5;
+  line-height: 1;
   overflow: hidden;
   background: #1f132b;
   border-radius: 1rem;
   width: 80vw;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 @media only screen and (max-width: 768px) {
   #result {
