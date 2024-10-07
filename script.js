@@ -1,5 +1,8 @@
 let names = [];
 let winnerNames = [];
+
+let prevRndIndex = -1;
+
 const result = document.getElementById('result');
 const drawButton = document.getElementById('drawButton');
 const updateButton = document.getElementById('updateButton');
@@ -20,7 +23,12 @@ function updateNames() {
 }
 
 function getRandomIndex(){
-    return Math.floor(Math.random() * names.length);
+    let res;
+    do {
+        res = Math.floor(Math.random() * names.length);
+    } while (prevRndIndex == res && names.length > 1);
+    prevRndIndex = res; 
+    return res;
 }
 
 function getRandomName() {
