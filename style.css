@@ -192,6 +192,13 @@ textarea {
   border-radius: 1rem;
   width: 80vw;
 }
+@media only screen and (max-width: 768px) {
+  #result {
+    font-size: 2rem;
+    height: 5rem;
+    margin: 1rem 0;
+  }
+}
 .name {
   display: inline-block;
   animation: slide-up 0.5s ease-out;
