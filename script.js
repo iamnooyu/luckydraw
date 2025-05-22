@@ -44,21 +44,35 @@ function getFinalRandomName() {
 }
 
 function animateDraw() {
-    let duration = 3000; // 3 seconds
-    let interval = 100; // 0.1 second
-    let steps = duration / interval;
-    let step = 0;
+    const totalDuration = 3000; // 3 seconds
+    const startInterval = 50; // 0.05 seconds
+    const endInterval = 500; // 0.5 seconds
+    let elapsedTime = 0;
+    let startTime = Date.now();
 
-    const animation = setInterval(() => {
-        result.innerHTML = `<span class="nameanimate">${getRandomName()}</span>`;
-        step++;
+    function easeOutQuad(t) {
+        return t * (2 - t);
+    }
 
-        if (step >= steps) {
-        clearInterval(animation);
-        result.innerHTML = `<span class="name">${getFinalRandomName()}</span>`;
-        drawButton.disabled = false;
+    function animationStep() {
+        const currentTime = Date.now();
+        elapsedTime = currentTime - startTime;
+
+        if (elapsedTime < totalDuration) {
+            result.innerHTML = `<span class="nameanimate">${getRandomName()}</span>`;
+
+            const progress = elapsedTime / totalDuration;
+            const easedProgress = easeOutQuad(progress);
+            const currentInterval = startInterval + (endInterval - startInterval) * easedProgress;
+            
+            setTimeout(animationStep, currentInterval);
+        } else {
+            result.innerHTML = `<span class="name">${getFinalRandomName()}</span>`;
+            drawButton.disabled = false;
         }
-    }, interval);
+    }
+
+    animationStep();
 }
 
 updateButton.addEventListener('click', updateNames);
