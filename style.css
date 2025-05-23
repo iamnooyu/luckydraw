@@ -33,15 +33,51 @@ body {
   width: 80%;
   max-width: 100vw;
 }
-#mainscreen {
+
+/* Updated styles for the main application container */
+#app-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  width: 100vw;
-  position: absolute;
+  /* Base styles for centering and transition */
+  margin: auto;
+  transition: all 0.3s ease-in-out;
+  overflow: hidden; /* Prevent content spill */
+  position: absolute; /* To allow centering within the viewport for fixed aspect ratios */
+  top: 0; left: 0; right: 0; bottom: 0; /* Center in viewport */
 }
+
+/* Default Responsive styles */
+body.aspect-responsive #app-container {
+  width: 100vw; /* Full viewport width */
+  height: 100vh; /* Full viewport height */
+  max-width: none;
+  max-height: none;
+  aspect-ratio: unset;
+  position: static; /* Overwrite absolute positioning for responsive */
+}
+
+/* 16:9 Aspect Ratio */
+body.aspect-16x9 #app-container {
+  width: 100vw;
+  height: calc(100vw * 9 / 16);
+  max-height: 100vh;
+  max-width: calc(100vh * 16 / 9);
+  aspect-ratio: 16 / 9;
+  /* overflow: hidden; is already in #app-container base */
+}
+
+/* 4:3 Aspect Ratio */
+body.aspect-4x3 #app-container {
+  width: 100vw;
+  height: calc(100vw * 3 / 4);
+  max-height: 100vh;
+  max-width: calc(100vh * 4 / 3);
+  aspect-ratio: 4 / 3;
+  /* overflow: hidden; is already in #app-container base */
+}
+
 #settingscreen {
   display: flex;
   flex-direction: column;
@@ -67,6 +103,42 @@ body {
   font-weight: 600;
   line-height: 1.5;
 }
+
+/* Styling for the new settings section */
+#settingscreen .setting-section {
+  margin: 1rem 0;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align items to the left */
+  width: 80%;
+  max-width: 600px;
+  border: 1px solid #555; /* Optional: to visually group the section */
+  border-radius: 8px;
+}
+
+#settingscreen .setting-section label { /* General label for "Screen Scale:" */
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+#settingscreen .setting-section div { /* Wrapper for each radio button + label */
+  margin: 0.25rem 0;
+  display: flex;
+  align-items: center; /* Vertically align radio and its label */
+}
+
+#settingscreen .setting-section input[type="radio"] {
+  margin-right: 0.5rem;
+  accent-color: #8614f8; /* Style the radio button itself */
+}
+
+#settingscreen .setting-section label[for^="ar"] { /* Specific labels for radio buttons */
+  font-size: 1rem;
+  font-weight: normal;
+}
+
 #logodevteddy {
   position: absolute;
   left: 2rem;
