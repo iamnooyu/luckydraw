@@ -55,7 +55,8 @@ body.aspect-responsive #app-container {
   max-width: none;
   max-height: none;
   aspect-ratio: unset;
-  position: static; /* Overwrite absolute positioning for responsive */
+  position: absolute; /* Changed from static for responsive mode */
+  /* top, left, right, bottom are inherited from #app-container base, ensuring full screen coverage */
 }
 
 /* 16:9 Aspect Ratio */
@@ -137,6 +138,48 @@ body.aspect-4x3 #app-container {
 #settingscreen .setting-section label[for^="ar"] { /* Specific labels for radio buttons */
   font-size: 1rem;
   font-weight: normal;
+}
+
+/* Styles for the new scale buttons container */
+#settingscreen .scale-buttons-container {
+  display: flex;
+  justify-content: flex-start; /* Align buttons to the left within the section */
+  flex-wrap: wrap; /* Allow buttons to wrap on smaller screens if necessary */
+  margin-top: 0.5rem; /* Add some space above the buttons */
+  width: 100%; /* Make container take full width of its parent (.setting-section) */
+}
+
+/* Base styles for individual scale buttons */
+#settingscreen .scale-button {
+  padding: 0.5rem 1rem; /* Use rem for scalable padding */
+  margin: 0.25rem; /* Uniform margin around buttons */
+  border: 1px solid #777; /* Slightly darker border than default example */
+  background-color: #5a4a6e; /* Darker, theme-consistent background */
+  color: #fff; /* White text */
+  cursor: pointer;
+  border-radius: 5px; /* Consistent with other buttons */
+  font-family: "Mitr", sans-serif; /* Consistent font */
+  font-size: 0.9rem; /* Slightly smaller font for these utility buttons */
+  line-height: 1.2;
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+#settingscreen .scale-button:hover {
+  background-color: #6b5a80; /* Slightly lighter on hover */
+  border-color: #999;
+}
+
+/* Styles for the active scale button */
+#settingscreen .active-scale-button {
+  background-color: #8614f8; /* Use existing theme's primary color */
+  color: white;
+  border-color: #a240ff; /* Lighter border to complement active background */
+  box-shadow: 0 0 5px rgba(134, 20, 248, 0.5); /* Subtle glow for active state */
+}
+
+#settingscreen .active-scale-button:hover {
+  background-color: #973af8; /* Slightly lighter version of primary for hover on active */
+  border-color: #b860ff;
 }
 
 #logodevteddy {

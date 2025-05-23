@@ -116,12 +116,8 @@ function displayListInTextbox() {
 
 // --- Aspect Ratio Functionality ---
 
-const ar16x9Radio = document.getElementById('ar16x9');
-const ar4x3Radio = document.getElementById('ar4x3');
-const arResponsiveRadio = document.getElementById('arResponsive');
-
-const aspectRatioRadios = [ar16x9Radio, ar4x3Radio, arResponsiveRadio];
-const aspectRatioClasses = ['aspect-16x9', 'aspect-4x3', 'aspect-responsive'];
+const scaleButtons = document.querySelectorAll('.scale-button');
+const aspectRatioClasses = ['aspect-16x9', 'aspect-4x3', 'aspect-responsive']; // Used to clean up body classes
 
 function updateAspectRatio(selectedValue) {
     // Remove all existing aspect ratio classes from body
@@ -136,43 +132,33 @@ function updateAspectRatio(selectedValue) {
         document.body.classList.add('aspect-responsive');
     }
 
+    // Update active state for buttons
+    scaleButtons.forEach(button => {
+        button.classList.remove('active-scale-button');
+        if (button.dataset.scale === selectedValue) {
+            button.classList.add('active-scale-button');
+        }
+    });
+
     // Save preference to localStorage
     localStorage.setItem('screenAspectRatio', selectedValue);
 }
 
 function applySavedAspectRatio() {
     const savedAspectRatio = localStorage.getItem('screenAspectRatio');
-    let currentRadio;
 
     if (savedAspectRatio) {
-        updateAspectRatio(savedAspectRatio); // Apply the class to body
-        // Check the correct radio button
-        if (savedAspectRatio === '16:9') {
-            currentRadio = ar16x9Radio;
-        } else if (savedAspectRatio === '4:3') {
-            currentRadio = ar4x3Radio;
-        } else {
-            currentRadio = arResponsiveRadio;
-        }
+        updateAspectRatio(savedAspectRatio); // This will also set the active button
     } else {
-        updateAspectRatio('responsive'); // Default to responsive
-        currentRadio = arResponsiveRadio;
-    }
-    
-    if (currentRadio) {
-        currentRadio.checked = true;
+        updateAspectRatio('responsive'); // Default to responsive, also sets active button
     }
 }
 
-// Add event listeners to radio buttons
-aspectRatioRadios.forEach(radio => {
-    if (radio) { // Ensure radio button exists before adding listener
-        radio.addEventListener('change', function() {
-            if (this.checked) {
-                updateAspectRatio(this.value);
-            }
-        });
-    }
+// Add event listeners to new scale buttons
+scaleButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        updateAspectRatio(this.dataset.scale);
+    });
 });
 
 // Apply saved or default aspect ratio on page load
